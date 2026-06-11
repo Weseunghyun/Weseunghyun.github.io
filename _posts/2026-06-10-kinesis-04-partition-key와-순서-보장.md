@@ -1,6 +1,6 @@
 ---
 title: "키네시스 완전 정복 4장 — partition key와 순서 보장 [중급]"
-date: 2026-06-10 09:04:00 +0900
+date: 2026-06-10 23:55:00 +0900
 categories: ["Kinesis", "키네시스 완전 정복"]
 tags: ["kinesis", "중급"]
 ---

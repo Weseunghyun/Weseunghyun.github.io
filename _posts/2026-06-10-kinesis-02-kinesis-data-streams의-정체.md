@@ -1,6 +1,6 @@
 ---
 title: "키네시스 완전 정복 2장 — Kinesis Data Streams의 정체 — 제품군·언제 안 쓰나 [입문]"
-date: 2026-06-10 09:02:00 +0900
+date: 2026-06-10 23:57:00 +0900
 categories: ["Kinesis", "키네시스 완전 정복"]
 tags: ["kinesis", "입문"]
 ---

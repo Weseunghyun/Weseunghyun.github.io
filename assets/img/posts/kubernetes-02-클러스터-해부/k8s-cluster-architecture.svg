@@ -1,0 +1,80 @@
+<svg width="780" height="560" viewBox="0 0 780 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">쿠버네티스 클러스터 구조</title>
+  <desc id="d">control plane(두뇌)의 API Server·etcd·Scheduler·Controller와 여러 node(일꾼)의 kubelet·런타임·kube-proxy 구성도</desc>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="780" height="560" rx="14" fill="#ffffff"/>
+  <text x="30" y="32" font-size="19" font-weight="700" fill="#0f172a">쿠버네티스 클러스터 구조</text>
+
+  <rect x="30" y="48" width="720" height="150" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="46" y="72" font-size="13" font-weight="700" fill="#1d4ed8">Control Plane · 두뇌 (결정한다)</text>
+  <g font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">
+    <g>
+      <rect x="46" y="84" width="164" height="98" rx="9" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+      <text x="128" y="120">kube-apiserver</text>
+      <text x="128" y="142" font-size="11" font-weight="400" fill="#475569">단일 관문</text>
+      <text x="128" y="158" font-size="11" font-weight="400" fill="#475569">etcd와 유일 대화</text>
+    </g>
+    <g>
+      <rect x="222" y="84" width="164" height="98" rx="9" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+      <text x="304" y="120">etcd</text>
+      <text x="304" y="142" font-size="11" font-weight="400" fill="#475569">모든 상태 저장</text>
+      <text x="304" y="158" font-size="11" font-weight="400" fill="#475569">클러스터의 기억</text>
+    </g>
+    <g>
+      <rect x="398" y="84" width="164" height="98" rx="9" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+      <text x="480" y="120">scheduler</text>
+      <text x="480" y="142" font-size="11" font-weight="400" fill="#475569">노드 배치 결정</text>
+    </g>
+    <g>
+      <rect x="574" y="84" width="164" height="98" rx="9" fill="#ffffff" stroke="#bfdbfe" stroke-width="1.5"/>
+      <text x="656" y="120">controller</text>
+      <text x="656" y="142" font-size="11" font-weight="400" fill="#475569">조정 루프</text>
+      <text x="656" y="158" font-size="11" font-weight="400" fill="#475569">자가치유</text>
+    </g>
+  </g>
+
+  <path d="M205 198 L205 250" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+  <path d="M575 198 L575 250" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#ah)"/>
+  <text x="390" y="228" font-size="11" fill="#64748b" text-anchor="middle">kubelet ↔ API Server</text>
+
+  <g>
+    <rect x="30" y="252" width="350" height="276" rx="12" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+    <text x="46" y="276" font-size="13" font-weight="700" fill="#0f766e">Node · 일꾼 (실행한다)</text>
+    <rect x="46" y="288" width="318" height="46" rx="8" fill="#ffffff" stroke="#99f6e4" stroke-width="1.5"/>
+    <text x="60" y="310" font-size="13" font-weight="700" fill="#0f172a">kubelet</text>
+    <text x="60" y="326" font-size="11" fill="#475569">런타임에 지시 · 상태 보고 · probe</text>
+    <rect x="46" y="342" width="318" height="98" rx="8" fill="#ffffff" stroke="#99f6e4" stroke-width="1.5"/>
+    <text x="60" y="364" font-size="13" font-weight="700" fill="#0f172a">container runtime (containerd)</text>
+    <g font-size="11" font-weight="700" fill="#0369a1" text-anchor="middle">
+      <rect x="60" y="376" width="84" height="52" rx="7" fill="#e0f2fe" stroke="#7dd3fc"/><text x="102" y="406">Pod</text>
+      <rect x="156" y="376" width="84" height="52" rx="7" fill="#e0f2fe" stroke="#7dd3fc"/><text x="198" y="406">Pod</text>
+      <rect x="252" y="376" width="84" height="52" rx="7" fill="#e0f2fe" stroke="#7dd3fc"/><text x="294" y="406">Pod</text>
+    </g>
+    <rect x="46" y="448" width="318" height="46" rx="8" fill="#ffffff" stroke="#99f6e4" stroke-width="1.5"/>
+    <text x="60" y="470" font-size="13" font-weight="700" fill="#0f172a">kube-proxy</text>
+    <text x="60" y="486" font-size="11" fill="#475569">Service 트래픽 라우팅</text>
+  </g>
+  <g>
+    <rect x="400" y="252" width="350" height="276" rx="12" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+    <text x="416" y="276" font-size="13" font-weight="700" fill="#0f766e">Node · 일꾼 (실행한다)</text>
+    <rect x="416" y="288" width="318" height="46" rx="8" fill="#ffffff" stroke="#99f6e4" stroke-width="1.5"/>
+    <text x="430" y="310" font-size="13" font-weight="700" fill="#0f172a">kubelet</text>
+    <text x="430" y="326" font-size="11" fill="#475569">런타임에 지시 · 상태 보고 · probe</text>
+    <rect x="416" y="342" width="318" height="98" rx="8" fill="#ffffff" stroke="#99f6e4" stroke-width="1.5"/>
+    <text x="430" y="364" font-size="13" font-weight="700" fill="#0f172a">container runtime (containerd)</text>
+    <g font-size="11" font-weight="700" fill="#0369a1" text-anchor="middle">
+      <rect x="430" y="376" width="84" height="52" rx="7" fill="#e0f2fe" stroke="#7dd3fc"/><text x="472" y="406">Pod</text>
+      <rect x="526" y="376" width="84" height="52" rx="7" fill="#e0f2fe" stroke="#7dd3fc"/><text x="568" y="406">Pod</text>
+      <rect x="622" y="376" width="84" height="52" rx="7" fill="#e0f2fe" stroke="#7dd3fc"/><text x="664" y="406">Pod</text>
+    </g>
+    <rect x="416" y="448" width="318" height="46" rx="8" fill="#ffffff" stroke="#99f6e4" stroke-width="1.5"/>
+    <text x="430" y="470" font-size="13" font-weight="700" fill="#0f172a">kube-proxy</text>
+    <text x="430" y="486" font-size="11" fill="#475569">Service 트래픽 라우팅</text>
+  </g>
+
+  <text x="30" y="548" font-size="11" fill="#94a3b8">파란 영역 = 두뇌(control plane) · 청록 영역 = 일꾼(node)</text>
+</svg>

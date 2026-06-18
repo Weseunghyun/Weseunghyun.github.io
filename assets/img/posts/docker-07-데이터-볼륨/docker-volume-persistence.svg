@@ -1,0 +1,35 @@
+<svg width="800" height="330" viewBox="0 0 800 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">컨테이너 쓰기 레이어 vs 볼륨</title>
+  <desc id="d">컨테이너의 쓰기 레이어는 컨테이너와 함께 사라지지만, 볼륨은 컨테이너 밖에 있어 데이터가 영속된다</desc>
+  <defs>
+    <marker id="av" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#0d9488"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="330" rx="14" fill="#ffffff"/>
+  <text x="28" y="32" font-size="18" font-weight="700" fill="#0f172a">데이터는 컨테이너 밖 볼륨에 — 안 그러면 사라진다</text>
+
+  <!-- container -->
+  <rect x="40" y="64" width="320" height="186" rx="11" fill="#fafafa" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="58" y="88" font-size="13" font-weight="700" fill="#334155">Container</text>
+  <rect x="64" y="100" width="272" height="44" rx="7" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5" stroke-dasharray="6 4"/>
+  <text x="200" y="127" font-size="12" font-weight="700" fill="#c2410c" text-anchor="middle">쓰기 레이어 (R/W)</text>
+  <rect x="64" y="152" width="272" height="40" rx="7" fill="#dbeafe" stroke="#93c5fd"/>
+  <text x="200" y="177" font-size="12" font-weight="700" fill="#1d4ed8" text-anchor="middle">이미지 레이어 (읽기 전용)</text>
+  <text x="200" y="224" font-size="12" font-weight="700" fill="#b91c1c" text-anchor="middle">docker rm → 쓰기 레이어 소멸 ✜</text>
+
+  <!-- volume -->
+  <rect x="470" y="92" width="300" height="130" rx="11" fill="#ecfdf5" stroke="#34d399" stroke-width="1.8"/>
+  <text x="620" y="124" font-size="15" font-weight="700" fill="#15803d" text-anchor="middle">Volume</text>
+  <text x="620" y="148" font-size="11" fill="#475569" text-anchor="middle">Docker 관리 · 컨테이너와 별개</text>
+  <text x="620" y="170" font-size="12" font-weight="700" fill="#15803d" text-anchor="middle">컨테이너 지워도 데이터 남음</text>
+  <text x="620" y="192" font-size="11" fill="#475569" text-anchor="middle">백업·이전 쉬움</text>
+
+  <!-- mount -->
+  <path d="M360 165 L468 157" stroke="#0d9488" stroke-width="1.8" fill="none" marker-end="url(#av)"/>
+  <text x="414" y="148" font-size="11" font-weight="700" fill="#0d9488" text-anchor="middle">마운트</text>
+  <text x="414" y="178" font-size="10" fill="#64748b" text-anchor="middle">/var/lib/data</text>
+
+  <text x="28" y="288" font-size="12" font-weight="700" fill="#334155">DB·상태처럼 꼭 살릴 데이터는 무조건 볼륨에.</text>
+  <text x="28" y="312" font-size="11" fill="#94a3b8">volume(권장·Docker 관리) · bind mount(호스트 경로 직결, 개발용) · tmpfs(메모리, 임시·비밀)</text>
+</svg>

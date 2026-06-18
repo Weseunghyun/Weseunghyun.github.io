@@ -1,0 +1,56 @@
+<svg width="800" height="420" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">docker run 뒤의 런타임 스택</title>
+  <desc id="d">docker CLI에서 dockerd, containerd, shim, runc를 거쳐 컨테이너 프로세스가 실행되는 스택</desc>
+  <defs>
+    <marker id="ad" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="420" rx="14" fill="#ffffff"/>
+  <text x="28" y="32" font-size="18" font-weight="700" fill="#0f172a">docker run 한 줄 뒤의 스택</text>
+
+  <g>
+    <rect x="120" y="52" width="320" height="48" rx="9" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="138" y="81" font-size="13" font-weight="700" fill="#0f172a">docker (CLI)</text>
+    <text x="430" y="81" font-size="11" fill="#475569" text-anchor="end">명령을 데몬에 요청</text>
+
+    <rect x="120" y="116" width="320" height="48" rx="9" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="138" y="145" font-size="13" font-weight="700" fill="#1d4ed8">dockerd (데몬)</text>
+    <text x="430" y="145" font-size="11" fill="#475569" text-anchor="end">이미지·네트워크·볼륨 관리</text>
+
+    <rect x="120" y="180" width="320" height="48" rx="9" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="138" y="209" font-size="13" font-weight="700" fill="#1d4ed8">containerd</text>
+    <text x="430" y="209" font-size="11" fill="#475569" text-anchor="end">컨테이너 라이프사이클</text>
+
+    <rect x="120" y="244" width="320" height="48" rx="9" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+    <text x="138" y="273" font-size="13" font-weight="700" fill="#0f766e">containerd-shim</text>
+    <text x="430" y="273" font-size="11" fill="#475569" text-anchor="end">컨테이너의 부모(상주)</text>
+
+    <rect x="120" y="308" width="320" height="48" rx="9" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+    <text x="138" y="337" font-size="13" font-weight="700" fill="#0f766e">runc</text>
+    <text x="430" y="337" font-size="11" fill="#475569" text-anchor="end">namespace·cgroup 만들고 빠짐</text>
+
+    <rect x="120" y="372" width="320" height="42" rx="9" fill="#e0f2fe" stroke="#7dd3fc" stroke-width="1.5"/>
+    <text x="280" y="398" font-size="13" font-weight="700" fill="#0369a1" text-anchor="middle">컨테이너 프로세스</text>
+  </g>
+
+  <g stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#ad)">
+    <path d="M280 100 L280 114"/>
+    <path d="M280 164 L280 178"/>
+    <path d="M280 228 L280 242"/>
+    <path d="M280 292 L280 306"/>
+    <path d="M280 356 L280 370"/>
+  </g>
+
+  <!-- side notes -->
+  <rect x="470" y="244" width="310" height="48" rx="8" fill="#ecfdf5" stroke="#86efac"/>
+  <text x="486" y="266" font-size="11" font-weight="700" fill="#15803d">shim = 컨테이너 부모</text>
+  <text x="486" y="284" font-size="11" fill="#475569">→ 데몬이 죽어도 컨테이너는 산다</text>
+
+  <rect x="470" y="308" width="310" height="48" rx="8" fill="#ecfdf5" stroke="#86efac"/>
+  <text x="486" y="330" font-size="11" font-weight="700" fill="#15803d">runc = OCI 표준 구현</text>
+  <text x="486" y="348" font-size="11" fill="#475569">→ crun·gVisor·Kata로 교체 가능</text>
+
+  <text x="470" y="100" font-size="11" fill="#94a3b8">파랑 = Docker 관리층</text>
+  <text x="470" y="120" font-size="11" fill="#94a3b8">청록 = 실제 실행층(K8s는 여기 직접 사용)</text>
+</svg>

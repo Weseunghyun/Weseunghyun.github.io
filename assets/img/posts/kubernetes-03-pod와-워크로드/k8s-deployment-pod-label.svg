@@ -1,0 +1,66 @@
+<svg width="790" height="430" viewBox="0 0 790 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">Deployment·ReplicaSet·Pod 계층과 label/selector</title>
+  <desc id="d">Deployment가 ReplicaSet을 통해 Pod 3개를 유지하고, Service가 app=web 라벨로 같은 Pod들을 선택하는 구조</desc>
+  <defs>
+    <marker id="a3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+    </marker>
+    <marker id="a3g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#0d9488"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="790" height="430" rx="14" fill="#ffffff"/>
+  <text x="28" y="32" font-size="18" font-weight="700" fill="#0f172a">Deployment → ReplicaSet → Pod, 그리고 label로 잇기</text>
+
+  <g text-anchor="middle">
+    <rect x="205" y="48" width="200" height="58" rx="9" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="305" y="74" font-size="14" font-weight="700" fill="#1d4ed8">Deployment</text>
+    <text x="305" y="93" font-size="11" fill="#475569">무중단 업데이트 · N개 선언</text>
+
+    <rect x="205" y="146" width="200" height="54" rx="9" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="305" y="170" font-size="14" font-weight="700" fill="#1d4ed8">ReplicaSet</text>
+    <text x="305" y="188" font-size="11" fill="#475569">복제본 수(3개) 유지</text>
+
+    <!-- Pods -->
+    <g>
+      <rect x="60" y="262" width="150" height="92" rx="9" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+      <text x="135" y="296" font-size="14" font-weight="700" fill="#0f766e">Pod</text>
+      <text x="135" y="320" font-size="12" font-weight="700" fill="#0369a1">app: web</text>
+    </g>
+    <g>
+      <rect x="230" y="262" width="150" height="92" rx="9" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+      <text x="305" y="296" font-size="14" font-weight="700" fill="#0f766e">Pod</text>
+      <text x="305" y="320" font-size="12" font-weight="700" fill="#0369a1">app: web</text>
+    </g>
+    <g>
+      <rect x="400" y="262" width="150" height="92" rx="9" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+      <text x="475" y="296" font-size="14" font-weight="700" fill="#0f766e">Pod</text>
+      <text x="475" y="320" font-size="12" font-weight="700" fill="#0369a1">app: web</text>
+    </g>
+
+    <!-- Service -->
+    <rect x="600" y="246" width="160" height="124" rx="9" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+    <text x="680" y="284" font-size="14" font-weight="700" fill="#c2410c">Service</text>
+    <text x="680" y="308" font-size="11" fill="#475569">selector:</text>
+    <text x="680" y="326" font-size="12" font-weight="700" fill="#0369a1">app = web</text>
+    <text x="680" y="350" font-size="11" fill="#475569">꼬리표로 선택</text>
+  </g>
+
+  <!-- structural arrows -->
+  <g stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#a3)">
+    <path d="M305 106 L305 144"/>
+    <path d="M305 200 L305 230 L135 230 L135 260"/>
+    <path d="M305 230 L305 260"/>
+    <path d="M305 230 L475 230 L475 260"/>
+  </g>
+  <text x="318" y="224" font-size="11" fill="#64748b" text-anchor="start">3개 유지</text>
+
+  <!-- service selects pods (dashed) -->
+  <g stroke="#0d9488" stroke-width="1.6" fill="none" stroke-dasharray="5 4" marker-end="url(#a3g)">
+    <path d="M600 300 L552 300"/>
+    <path d="M600 320 C470 360 360 360 305 356"/>
+    <path d="M600 312 C400 380 230 372 135 356"/>
+  </g>
+
+  <text x="28" y="412" font-size="11" fill="#94a3b8">실선 = 만들고 유지(소유) · 점선(청록) = label로 선택 · Pod가 죽고 새로 떠도 같은 꼬리표면 자동 포함</text>
+</svg>

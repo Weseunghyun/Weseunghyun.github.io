@@ -1,0 +1,34 @@
+<svg width="800" height="360" viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">requests와 limits의 차이</title>
+  <desc id="d">requests는 스케줄러가 보는 예약, limits는 노드가 강제하는 상한이며 메모리 초과 시 OOM kill된다</desc>
+  <rect x="0" y="0" width="800" height="360" rx="14" fill="#ffffff"/>
+  <text x="28" y="32" font-size="18" font-weight="700" fill="#0f172a">requests(예약) vs limits(상한)</text>
+
+  <!-- requests card -->
+  <rect x="24" y="50" width="368" height="130" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="44" y="78" font-size="15" font-weight="700" fill="#1d4ed8">requests — 예약</text>
+  <text x="44" y="104" font-size="12" fill="#334155">👁 누가 본다: <tspan font-weight="700">스케줄러</tspan></text>
+  <text x="44" y="128" font-size="12" fill="#334155">「최소 이만큼은 보장해줘」</text>
+  <text x="44" y="152" font-size="12" fill="#334155">→ 어느 노드에 둘지 배치 기준</text>
+  <text x="44" y="172" font-size="11" fill="#64748b">너무 낮으면 과밀, 너무 높으면 노드 놀림</text>
+
+  <!-- limits card -->
+  <rect x="408" y="50" width="368" height="130" rx="10" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="428" y="78" font-size="15" font-weight="700" fill="#c2410c">limits — 상한</text>
+  <text x="428" y="104" font-size="12" fill="#334155">👁 누가 강제: <tspan font-weight="700">노드(cgroup)</tspan></text>
+  <text x="428" y="128" font-size="12" fill="#334155">CPU 초과 → 쓰로틀(느려짐)</text>
+  <text x="428" y="152" font-size="12" font-weight="700" fill="#b91c1c">메모리 초과 → OOM kill (코드 137)</text>
+  <text x="428" y="172" font-size="11" fill="#64748b">실행 중 넘으면 그 자리에서 적용</text>
+
+  <!-- node capacity bar -->
+  <text x="28" y="222" font-size="13" font-weight="700" fill="#0f172a">스케줄러는 requests 합으로 노드를 채운다</text>
+  <rect x="24" y="236" width="752" height="64" rx="9" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <g>
+    <rect x="32" y="244" width="210" height="48" rx="6" fill="#ccfbf1" stroke="#5eead4"/><text x="137" y="273" font-size="12" font-weight="700" fill="#0f766e" text-anchor="middle">Pod A req</text>
+    <rect x="248" y="244" width="170" height="48" rx="6" fill="#ccfbf1" stroke="#5eead4"/><text x="333" y="273" font-size="12" font-weight="700" fill="#0f766e" text-anchor="middle">Pod B req</text>
+    <rect x="424" y="244" width="190" height="48" rx="6" fill="#ccfbf1" stroke="#5eead4"/><text x="519" y="273" font-size="12" font-weight="700" fill="#0f766e" text-anchor="middle">Pod C req</text>
+    <rect x="620" y="244" width="148" height="48" rx="6" fill="#ffffff" stroke="#e2e8f0" stroke-dasharray="4 4"/><text x="694" y="273" font-size="12" fill="#94a3b8" text-anchor="middle">여유</text>
+  </g>
+
+  <text x="28" y="334" font-size="11" fill="#94a3b8">핵심: requests = 스케줄러의 예약 기준 · limits = 노드의 강제 상한(메모리 초과 = 강제 종료)</text>
+</svg>

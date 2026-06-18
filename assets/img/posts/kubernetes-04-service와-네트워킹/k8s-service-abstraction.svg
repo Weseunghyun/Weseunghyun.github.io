@@ -1,0 +1,52 @@
+<svg width="800" height="380" viewBox="0 0 800 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">Service — 바뀌는 Pod 앞의 고정 간판</title>
+  <desc id="d">클라이언트는 고정된 Service 이름으로 접속하고, 뒤의 Pod는 죽고 새 IP로 바뀌어도 Service가 흡수한다</desc>
+  <defs>
+    <marker id="a4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="380" rx="14" fill="#ffffff"/>
+  <text x="28" y="32" font-size="18" font-weight="700" fill="#0f172a">Service — 바뀌는 Pod 앞에 세운 고정 간판</text>
+
+  <!-- client -->
+  <rect x="24" y="150" width="130" height="80" rx="9" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="89" y="182" font-size="13" font-weight="700" fill="#0f172a" text-anchor="middle">클라이언트</text>
+  <text x="89" y="202" font-size="11" fill="#475569" text-anchor="middle">"web" 으로 접속</text>
+
+  <!-- service -->
+  <rect x="208" y="130" width="184" height="120" rx="10" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+  <text x="300" y="166" font-size="15" font-weight="700" fill="#c2410c" text-anchor="middle">Service "web"</text>
+  <text x="300" y="190" font-size="11" fill="#475569" text-anchor="middle">고정 ClusterIP + DNS 이름</text>
+  <text x="300" y="210" font-size="11" fill="#475569" text-anchor="middle">label로 Pod 선택</text>
+  <text x="300" y="230" font-size="11" fill="#475569" text-anchor="middle">부하 분산</text>
+
+  <!-- pods -->
+  <g text-anchor="middle">
+    <rect x="470" y="40" width="306" height="78" rx="9" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+    <text x="540" y="74" font-size="13" font-weight="700" fill="#0f766e">Pod</text>
+    <text x="540" y="94" font-size="11" font-weight="700" fill="#0369a1">app: web</text>
+    <text x="660" y="84" font-size="12" fill="#475569">IP 10.1.1.5</text>
+
+    <rect x="470" y="150" width="306" height="78" rx="9" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
+    <text x="540" y="184" font-size="13" font-weight="700" fill="#0f766e">Pod</text>
+    <text x="540" y="204" font-size="11" font-weight="700" fill="#0369a1">app: web</text>
+    <text x="660" y="194" font-size="12" fill="#475569">IP 10.1.1.6</text>
+
+    <rect x="470" y="260" width="306" height="78" rx="9" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="540" y="290" font-size="13" font-weight="700" fill="#b91c1c">Pod ✜ 교체</text>
+    <text x="540" y="310" font-size="11" font-weight="700" fill="#0369a1">app: web</text>
+    <text x="660" y="294" font-size="12" fill="#475569">10.1.1.6</text>
+    <text x="660" y="312" font-size="12" font-weight="700" fill="#b91c1c">→ 10.1.1.9</text>
+  </g>
+
+  <!-- arrows -->
+  <path d="M154 190 L206 190" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a4)"/>
+  <g stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#a4)">
+    <path d="M392 165 C440 120 440 90 468 80"/>
+    <path d="M392 190 L468 190"/>
+    <path d="M392 215 C440 270 440 290 468 299"/>
+  </g>
+
+  <text x="28" y="364" font-size="11" fill="#94a3b8">뒤의 Pod가 죽고 새 IP로 떠도, 클라이언트는 늘 "web"만 부른다 — Service가 변화를 흡수한다.</text>
+</svg>

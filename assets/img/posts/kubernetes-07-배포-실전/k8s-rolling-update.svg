@@ -1,0 +1,43 @@
+<svg width="800" height="330" viewBox="0 0 800 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">롤링 업데이트 — 무중단 배포</title>
+  <desc id="d">새 버전 Pod가 readiness를 통과한 뒤에야 옛 버전 Pod를 하나씩 내려 항상 준비된 Pod가 유지된다</desc>
+  <defs>
+    <marker id="a7" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="800" height="330" rx="14" fill="#ffffff"/>
+  <text x="28" y="32" font-size="18" font-weight="700" fill="#0f172a">롤링 업데이트 — 하나씩 갈아끼워 무중단</text>
+
+  <g text-anchor="middle" font-size="13" font-weight="700">
+    <!-- stage 1 -->
+    <text x="124" y="68" font-size="13" fill="#334155">① 시작 (v1 ×3)</text>
+    <g fill="#1d4ed8">
+      <rect x="49" y="80" width="150" height="50" rx="8" fill="#eff6ff" stroke="#93c5fd"/><text x="124" y="110">v1</text>
+      <rect x="49" y="138" width="150" height="50" rx="8" fill="#eff6ff" stroke="#93c5fd"/><text x="124" y="168">v1</text>
+      <rect x="49" y="196" width="150" height="50" rx="8" fill="#eff6ff" stroke="#93c5fd"/><text x="124" y="226">v1</text>
+    </g>
+
+    <!-- stage 2 -->
+    <text x="400" y="68" font-size="13" fill="#334155">② 점진 교체</text>
+    <rect x="325" y="80" width="150" height="50" rx="8" fill="#dcfce7" stroke="#4ade80"/><text x="400" y="100" fill="#15803d">v2</text><text x="400" y="118" font-size="10" font-weight="400" fill="#15803d">readiness ✓</text>
+    <rect x="325" y="138" width="150" height="50" rx="8" fill="#eff6ff" stroke="#93c5fd"/><text x="400" y="168" fill="#1d4ed8">v1</text>
+    <rect x="325" y="196" width="150" height="50" rx="8" fill="#fef2f2" stroke="#fca5a5" stroke-dasharray="5 4"/><text x="400" y="220" fill="#b91c1c" font-size="12">v1 → 내림</text>
+
+    <!-- stage 3 -->
+    <text x="676" y="68" font-size="13" fill="#334155">③ 완료 (v2 ×3)</text>
+    <g fill="#15803d">
+      <rect x="601" y="80" width="150" height="50" rx="8" fill="#dcfce7" stroke="#4ade80"/><text x="676" y="110">v2</text>
+      <rect x="601" y="138" width="150" height="50" rx="8" fill="#dcfce7" stroke="#4ade80"/><text x="676" y="168">v2</text>
+      <rect x="601" y="196" width="150" height="50" rx="8" fill="#dcfce7" stroke="#4ade80"/><text x="676" y="226">v2</text>
+    </g>
+  </g>
+
+  <g stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#a7)">
+    <path d="M205 163 L319 163"/>
+    <path d="M481 163 L595 163"/>
+  </g>
+
+  <text x="400" y="290" font-size="12" font-weight="700" fill="#0f766e" text-anchor="middle">새 Pod가 readiness 통과한 뒤에야 옛 Pod를 내린다</text>
+  <text x="400" y="312" font-size="11" fill="#94a3b8" text-anchor="middle">→ 항상 준비된 Pod가 충분히 떠 있어 서비스가 끊기지 않는다 (문제 시 rollout undo로 즉시 롤백)</text>
+</svg>

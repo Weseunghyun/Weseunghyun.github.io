@@ -1,0 +1,37 @@
+<svg width="800" height="430" viewBox="0 0 800 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">컨테이너와 가상 머신의 차이</title>
+  <desc id="d">VM은 앱마다 게스트 OS를 통째로 띄워 무겁고, 컨테이너는 호스트 커널을 공유해 가볍다</desc>
+  <rect x="0" y="0" width="800" height="430" rx="14" fill="#ffffff"/>
+  <text x="28" y="32" font-size="18" font-weight="700" fill="#0f172a">가상 머신(VM) vs 컨테이너(Docker)</text>
+  <text x="200" y="60" font-size="14" font-weight="700" fill="#64748b" text-anchor="middle">가상 머신</text>
+  <text x="600" y="60" font-size="14" font-weight="700" fill="#0f766e" text-anchor="middle">컨테이너</text>
+
+  <!-- VM side -->
+  <g text-anchor="middle">
+    <rect x="40" y="120" width="156" height="170" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+    <rect x="48" y="128" width="140" height="74" rx="6" fill="#dbeafe" stroke="#93c5fd"/><text x="118" y="170" font-size="12" font-weight="700" fill="#1d4ed8">App</text>
+    <rect x="48" y="210" width="140" height="72" rx="6" fill="#bfdbfe" stroke="#60a5fa"/><text x="118" y="242" font-size="11" font-weight="700" fill="#1e40af">Guest OS</text>
+    <rect x="204" y="120" width="156" height="170" rx="8" fill="#eff6ff" stroke="#93c5fd"/>
+    <rect x="212" y="128" width="140" height="74" rx="6" fill="#dbeafe" stroke="#93c5fd"/><text x="282" y="170" font-size="12" font-weight="700" fill="#1d4ed8">App</text>
+    <rect x="212" y="210" width="140" height="72" rx="6" fill="#bfdbfe" stroke="#60a5fa"/><text x="282" y="242" font-size="11" font-weight="700" fill="#1e40af">Guest OS</text>
+
+    <rect x="40" y="298" width="320" height="32" rx="5" fill="#f1f5f9" stroke="#cbd5e1"/><text x="200" y="319" font-size="12" font-weight="700" fill="#334155">Hypervisor</text>
+    <rect x="40" y="334" width="320" height="32" rx="5" fill="#f1f5f9" stroke="#cbd5e1"/><text x="200" y="355" font-size="12" font-weight="700" fill="#334155">Host OS</text>
+    <rect x="40" y="370" width="320" height="32" rx="5" fill="#e2e8f0" stroke="#cbd5e1"/><text x="200" y="391" font-size="12" font-weight="700" fill="#334155">Hardware</text>
+  </g>
+
+  <!-- Container side -->
+  <g text-anchor="middle">
+    <rect x="448" y="200" width="100" height="90" rx="7" fill="#ccfbf1" stroke="#5eead4"/><text x="498" y="250" font-size="12" font-weight="700" fill="#0f766e">App</text>
+    <rect x="552" y="200" width="100" height="90" rx="7" fill="#ccfbf1" stroke="#5eead4"/><text x="602" y="250" font-size="12" font-weight="700" fill="#0f766e">App</text>
+    <rect x="656" y="200" width="100" height="90" rx="7" fill="#ccfbf1" stroke="#5eead4"/><text x="706" y="250" font-size="12" font-weight="700" fill="#0f766e">App</text>
+
+    <rect x="440" y="298" width="320" height="32" rx="5" fill="#f1f5f9" stroke="#cbd5e1"/><text x="600" y="319" font-size="12" font-weight="700" fill="#334155">Container Runtime</text>
+    <rect x="440" y="334" width="320" height="32" rx="5" fill="#99f6e4" stroke="#2dd4bf"/><text x="600" y="355" font-size="12" font-weight="700" fill="#0f766e">Host OS · 커널 (공유)</text>
+    <rect x="440" y="370" width="320" height="32" rx="5" fill="#e2e8f0" stroke="#cbd5e1"/><text x="600" y="391" font-size="12" font-weight="700" fill="#334155">Hardware</text>
+  </g>
+
+  <text x="118" y="108" font-size="10" fill="#1d4ed8" text-anchor="middle">앱마다 Guest OS 통째 → 무겁다</text>
+  <text x="600" y="188" font-size="10" fill="#0f766e" text-anchor="middle">Guest OS 없음 · 커널 공유 → 가볍다</text>
+  <text x="28" y="422" font-size="11" fill="#94a3b8">차이는 한 곳 — VM은 OS를 새로 깔고, 컨테이너는 호스트 커널을 공유한다.</text>
+</svg>

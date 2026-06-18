@@ -1,0 +1,44 @@
+<svg width="800" height="370" viewBox="0 0 800 370" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">컨테이너 = 프로세스 + namespace + cgroup</title>
+  <desc id="d">namespace는 보이는 것을 격리하고, cgroup은 쓰는 자원을 제한한다</desc>
+  <rect x="0" y="0" width="800" height="370" rx="14" fill="#ffffff"/>
+  <text x="28" y="32" font-size="18" font-weight="700" fill="#0f172a">컨테이너의 정체 = 프로세스 + namespace + cgroup</text>
+
+  <rect x="250" y="50" width="300" height="46" rx="9" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="400" y="79" font-size="13" font-weight="700" fill="#334155" text-anchor="middle">컨테이너 = 그냥 리눅스 프로세스</text>
+
+  <!-- namespace card -->
+  <rect x="24" y="118" width="368" height="216" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="44" y="146" font-size="15" font-weight="700" fill="#1d4ed8">namespace — 무엇이 보이나</text>
+  <text x="44" y="166" font-size="12" font-weight="700" fill="#1d4ed8">= 격리 (보이는 것을 가린다)</text>
+  <g font-size="12" font-weight="700" fill="#1e40af" text-anchor="middle">
+    <rect x="44" y="182" width="100" height="34" rx="7" fill="#dbeafe" stroke="#93c5fd"/><text x="94" y="204">PID</text>
+    <rect x="156" y="182" width="100" height="34" rx="7" fill="#dbeafe" stroke="#93c5fd"/><text x="206" y="204">NET</text>
+    <rect x="268" y="182" width="100" height="34" rx="7" fill="#dbeafe" stroke="#93c5fd"/><text x="318" y="204">MNT</text>
+    <rect x="44" y="224" width="100" height="34" rx="7" fill="#dbeafe" stroke="#93c5fd"/><text x="94" y="246">UTS</text>
+    <rect x="156" y="224" width="100" height="34" rx="7" fill="#dbeafe" stroke="#93c5fd"/><text x="206" y="246">IPC</text>
+    <rect x="268" y="224" width="100" height="34" rx="7" fill="#dbeafe" stroke="#93c5fd"/><text x="318" y="246">USER</text>
+  </g>
+  <text x="44" y="290" font-size="11" fill="#475569">자기만의 프로세스 목록 · 네트워크 · 파일시스템을</text>
+  <text x="44" y="308" font-size="11" fill="#475569">가진 것처럼 보인다 (PID 1부터 시작)</text>
+
+  <!-- cgroup card -->
+  <rect x="408" y="118" width="368" height="216" rx="10" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="428" y="146" font-size="15" font-weight="700" fill="#c2410c">cgroup — 얼마나 쓰나</text>
+  <text x="428" y="166" font-size="12" font-weight="700" fill="#c2410c">= 제한 (쓰는 양을 막는다)</text>
+  <g>
+    <text x="428" y="200" font-size="12" font-weight="700" fill="#334155">CPU</text>
+    <rect x="476" y="190" width="280" height="16" rx="5" fill="#fef3c7" stroke="#fcd34d"/>
+    <rect x="476" y="190" width="180" height="16" rx="5" fill="#fbbf24"/>
+    <line x1="676" y1="184" x2="676" y2="212" stroke="#b45309" stroke-width="2"/>
+    <text x="700" y="186" font-size="9" fill="#b45309">limit</text>
+    <text x="428" y="242" font-size="12" font-weight="700" fill="#334155">MEM</text>
+    <rect x="476" y="232" width="280" height="16" rx="5" fill="#fef3c7" stroke="#fcd34d"/>
+    <rect x="476" y="232" width="240" height="16" rx="5" fill="#fbbf24"/>
+    <line x1="676" y1="226" x2="676" y2="254" stroke="#b45309" stroke-width="2"/>
+  </g>
+  <text x="428" y="290" font-size="12" font-weight="700" fill="#b91c1c">메모리가 limit을 넘으면 → OOM kill (137)</text>
+  <text x="428" y="308" font-size="11" fill="#475569">CPU·메모리·I/O·프로세스 수 상한</text>
+
+  <text x="28" y="356" font-size="11" fill="#94a3b8">namespace(격리)와 cgroup(제한)은 별개 기능 — 컨테이너는 둘을 함께 쓴다.</text>
+</svg>

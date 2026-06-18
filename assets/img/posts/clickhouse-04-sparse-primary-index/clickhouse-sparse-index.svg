@@ -1,0 +1,44 @@
+<svg width="840" height="440" viewBox="0 0 840 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">ClickHouse sparse primary index</title>
+  <desc id="d">정렬된 데이터를 8192행 granule로 나누고, primary.idx는 각 granule 첫 행의 키만 mark로 저장해 쿼리가 후보 granule만 읽는다</desc>
+  <defs>
+    <marker id="cs" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="840" height="440" rx="14" fill="#ffffff"/>
+  <text x="28" y="32" font-size="18" font-weight="700" fill="#0f172a">sparse primary index — granule마다 mark 하나</text>
+
+  <!-- query -->
+  <rect x="28" y="48" width="250" height="44" rx="8" fill="#fff7ed" stroke="#fb923c" stroke-width="1.5"/>
+  <text x="44" y="76" font-size="13" font-weight="700" fill="#c2410c">WHERE UserID = 2300</text>
+
+  <!-- primary.idx -->
+  <text x="44" y="120" font-size="12" font-weight="700" fill="#1d4ed8">primary.idx (마크 = 각 granule 첫 키)</text>
+  <g font-size="12" text-anchor="middle">
+    <rect x="28" y="128" width="250" height="40" fill="#eff6ff" stroke="#bfdbfe"/><text x="153" y="153" fill="#1e40af">mark0 → 첫키 0</text>
+    <rect x="28" y="168" width="250" height="40" fill="#eff6ff" stroke="#bfdbfe"/><text x="153" y="193" fill="#1e40af">mark1 → 첫키 1000</text>
+    <rect x="28" y="208" width="250" height="40" fill="#ffedd5" stroke="#fb923c" stroke-width="2"/><text x="153" y="233" fill="#9a3412" font-weight="700">mark2 → 첫키 2000  ◀ 히트</text>
+    <rect x="28" y="248" width="250" height="40" fill="#eff6ff" stroke="#bfdbfe"/><text x="153" y="273" fill="#1e40af">mark3 → 첫키 3000</text>
+    <rect x="28" y="288" width="250" height="40" fill="#eff6ff" stroke="#bfdbfe"/><text x="153" y="313" fill="#1e40af">mark4 → 첫키 4000</text>
+    <rect x="28" y="328" width="250" height="40" fill="#eff6ff" stroke="#bfdbfe"/><text x="153" y="353" fill="#1e40af">mark5 → 첫키 5000</text>
+  </g>
+  <text x="153" y="392" font-size="11" fill="#64748b" text-anchor="middle">2000 ≤ 2300 &lt; 3000 → granule 2</text>
+
+  <!-- granules (data) -->
+  <text x="560" y="120" font-size="12" font-weight="700" fill="#0f766e" text-anchor="middle">정렬된 데이터 (granule = 8192행)</text>
+  <g font-size="12" text-anchor="middle">
+    <rect x="360" y="128" width="400" height="40" fill="#f8fafc" stroke="#e2e8f0"/><text x="560" y="153" fill="#94a3b8">granule 0 · 8192행 (스킵)</text>
+    <rect x="360" y="168" width="400" height="40" fill="#f8fafc" stroke="#e2e8f0"/><text x="560" y="193" fill="#94a3b8">granule 1 · 8192행 (스킵)</text>
+    <rect x="360" y="208" width="400" height="40" fill="#ccfbf1" stroke="#2dd4bf" stroke-width="2"/><text x="560" y="233" fill="#0f766e" font-weight="700">granule 2 · 8192행 ◀ 이것만 읽음</text>
+    <rect x="360" y="248" width="400" height="40" fill="#f8fafc" stroke="#e2e8f0"/><text x="560" y="273" fill="#94a3b8">granule 3 · 8192행 (스킵)</text>
+    <rect x="360" y="288" width="400" height="40" fill="#f8fafc" stroke="#e2e8f0"/><text x="560" y="313" fill="#94a3b8">granule 4 · 8192행 (스킵)</text>
+    <rect x="360" y="328" width="400" height="40" fill="#f8fafc" stroke="#e2e8f0"/><text x="560" y="353" fill="#94a3b8">granule 5 · 8192행 (스킵)</text>
+  </g>
+
+  <!-- mark2 -> granule2 -->
+  <path d="M278 228 L358 228" stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#cs)"/>
+  <text x="318" y="220" font-size="10" fill="#64748b" text-anchor="middle">.mrk 오프셋</text>
+
+  <text x="28" y="420" font-size="11" fill="#94a3b8">8192행당 mark 1개 → 인덱스는 데이터의 약 1/8192 크기(메모리에 다 올라감). binary search로 후보 granule만 읽고 나머지는 스킵.</text>
+</svg>

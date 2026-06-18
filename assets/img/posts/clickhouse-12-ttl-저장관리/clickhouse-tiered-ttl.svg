@@ -1,0 +1,57 @@
+<svg width="860" height="400" viewBox="0 0 860 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">TTL과 계층형 저장 — 데이터가 나이 들수록 싼 디스크로 흘려보내고 끝에는 삭제</title>
+  <desc id="d">최근 part는 빠른 SSD(hot)에 있다가, TTL 시간 규칙에 따라 HDD(warm), S3(cold)로 이동하고, 만료되면 삭제된다. 이동·삭제는 모두 백그라운드 머지 중에 적용된다.</desc>
+  <defs>
+    <marker id="tm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="860" height="400" rx="14" fill="#ffffff"/>
+  <text x="28" y="34" font-size="18" font-weight="700" fill="#0f172a">TTL · 계층형 저장 — 나이 들수록 싼 곳으로, 끝에는 삭제</text>
+  <text x="28" y="55" font-size="11.5" fill="#64748b">TTL d + INTERVAL 1 WEEK TO VOLUME 'hot', 1 MONTH TO VOLUME 'cold', 1 YEAR DELETE</text>
+
+  <!-- age axis -->
+  <text x="60" y="92" font-size="11" fill="#94a3b8">데이터 나이 →  최근</text>
+  <text x="690" y="92" font-size="11" fill="#94a3b8" text-anchor="end">오래됨</text>
+  <path d="M60 98 L800 98" stroke="#e2e8f0" stroke-width="1.4" fill="none" marker-end="url(#tm)"/>
+
+  <!-- HOT tier -->
+  <rect x="60" y="120" width="220" height="150" rx="11" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.8"/>
+  <text x="170" y="146" font-size="14" font-weight="700" fill="#b91c1c" text-anchor="middle">HOT · 빠른 SSD</text>
+  <text x="170" y="164" font-size="10.5" fill="#9a3b3b" text-anchor="middle">최근 1주 · 비싸고 빠름</text>
+  <g text-anchor="middle" font-size="10">
+    <rect x="80" y="178" width="84" height="36" rx="5" fill="#fee2e2" stroke="#fca5a5"/><text x="122" y="200" fill="#7f1d1d">part 오늘</text>
+    <rect x="176" y="178" width="84" height="36" rx="5" fill="#fee2e2" stroke="#fca5a5"/><text x="218" y="200" fill="#7f1d1d">part 어제</text>
+    <rect x="80" y="222" width="180" height="34" rx="5" fill="#fee2e2" stroke="#fca5a5"/><text x="170" y="243" fill="#7f1d1d">part 이번 주</text>
+  </g>
+
+  <!-- WARM/COLD tier -->
+  <rect x="320" y="120" width="220" height="150" rx="11" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.8"/>
+  <text x="430" y="146" font-size="14" font-weight="700" fill="#1d4ed8" text-anchor="middle">COLD · HDD / S3</text>
+  <text x="430" y="164" font-size="10.5" fill="#3b5b8c" text-anchor="middle">1개월~ · 싸고 느림</text>
+  <g text-anchor="middle" font-size="10">
+    <rect x="340" y="178" width="84" height="34" rx="5" fill="#dbeafe" stroke="#93c5fd"/><text x="382" y="199" fill="#1e3a8a">part 지난달</text>
+    <rect x="436" y="178" width="84" height="34" rx="5" fill="#dbeafe" stroke="#93c5fd"/><text x="478" y="199" fill="#1e3a8a">part 두달 전</text>
+    <rect x="340" y="220" width="180" height="34" rx="5" fill="#dbeafe" stroke="#93c5fd"/><text x="430" y="241" fill="#1e3a8a">part 반년 전</text>
+  </g>
+
+  <!-- DELETE -->
+  <rect x="580" y="120" width="220" height="150" rx="11" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.8" stroke-dasharray="6 4"/>
+  <text x="690" y="146" font-size="14" font-weight="700" fill="#64748b" text-anchor="middle">삭제 (DELETE)</text>
+  <text x="690" y="164" font-size="10.5" fill="#94a3b8" text-anchor="middle">1년 후 · 통째 드롭</text>
+  <text x="690" y="206" font-size="34" fill="#cbd5e1" text-anchor="middle">🗑</text>
+  <text x="690" y="240" font-size="10" fill="#94a3b8" text-anchor="middle">파티션 정렬 + ttl_only_drop_parts=1</text>
+  <text x="690" y="254" font-size="10" fill="#94a3b8" text-anchor="middle">→ 재작성 없이 part 통째 버림</text>
+
+  <!-- flow arrows -->
+  <g stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#tm)">
+    <path d="M282 216 L318 216"/>
+    <path d="M542 216 L578 216"/>
+  </g>
+  <text x="300" y="208" font-size="9.5" fill="#64748b" text-anchor="middle">1주 후</text>
+  <text x="560" y="208" font-size="9.5" fill="#64748b" text-anchor="middle">1년 후</text>
+
+  <text x="28" y="312" font-size="11.5" fill="#475569"><tspan font-weight="700" fill="#0f766e">언제 실행되나:</tspan> 이동·삭제는 insert 시점이 아니라 <tspan font-weight="700">백그라운드 머지 중</tspan>에 적용 — 만료 시각이 지나도 다음 머지 전까진 남아 있을 수 있다(공식 문서 기준).</text>
+  <text x="28" y="334" font-size="11" fill="#94a3b8">move TTL만 예외로 insert 시점에 즉시 적용 가능(perform_ttl_move_on_insert=1). 즉시 정리는 OPTIMIZE TABLE … FINAL(비쌈).</text>
+  <text x="28" y="356" font-size="11" fill="#94a3b8">DELETE 외에 RECOMPRESS(콜드 데이터 강한 코덱 재압축) · GROUP BY 롤업(버리기 전 요약)도 같은 TTL 절에 함께 쓸 수 있다.</text>
+</svg>

@@ -1,0 +1,74 @@
+<svg width="860" height="440" viewBox="0 0 860 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">Projection — 같은 part 안의 다른 정렬 사본을 옵티마이저가 선택</title>
+  <desc id="d">한 data part 안에 base 데이터(event_date 정렬)와 projection(user_id 정렬)이 함께 산다. 옵티마이저가 쿼리 조건에 따라 더 적게 읽는 쪽을 part마다 자동으로 고른다.</desc>
+  <defs>
+    <marker id="pm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="860" height="440" rx="14" fill="#ffffff"/>
+  <text x="28" y="34" font-size="18" font-weight="700" fill="#0f172a">Projection — 같은 테이블 안에 정렬이 다른 사본을 두고, 옵티마이저가 고른다</text>
+
+  <!-- data part container -->
+  <rect x="28" y="58" width="360" height="306" rx="12" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.6"/>
+  <text x="48" y="84" font-size="14" font-weight="700" fill="#334155">하나의 data part</text>
+  <text x="48" y="102" font-size="10.5" fill="#94a3b8">base와 projection이 한 part 안에 — atomic하게 함께 유지</text>
+
+  <!-- base data box -->
+  <rect x="48" y="116" width="320" height="104" rx="9" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.6"/>
+  <text x="64" y="138" font-size="13" font-weight="700" fill="#1d4ed8">base 데이터 · ORDER BY event_date</text>
+  <g font-size="10.5" fill="#475569" text-anchor="middle">
+    <rect x="64" y="150" width="64" height="26" rx="4" fill="#dbeafe" stroke="#bfdbfe"/><text x="96" y="167">06-10</text>
+    <rect x="134" y="150" width="64" height="26" rx="4" fill="#dbeafe" stroke="#bfdbfe"/><text x="166" y="167">06-11</text>
+    <rect x="204" y="150" width="64" height="26" rx="4" fill="#dbeafe" stroke="#bfdbfe"/><text x="236" y="167">06-12</text>
+    <rect x="274" y="150" width="78" height="26" rx="4" fill="#dbeafe" stroke="#bfdbfe"/><text x="313" y="167">06-13…</text>
+  </g>
+  <text x="64" y="200" font-size="10.5" fill="#64748b">날짜 순으로 granule 정렬 — 날짜로 거르면 건너뛰기 빠름</text>
+
+  <!-- projection box -->
+  <rect x="48" y="232" width="320" height="116" rx="9" fill="#fff7ed" stroke="#fdba74" stroke-width="1.6"/>
+  <text x="64" y="254" font-size="13" font-weight="700" fill="#c2410c">projection proj_by_user · ORDER BY user_id</text>
+  <text x="64" y="271" font-size="10" fill="#9a6b43">같은 행을 user_id 순으로 다시 정렬한 hidden 사본</text>
+  <g font-size="10.5" fill="#475569" text-anchor="middle">
+    <rect x="64" y="282" width="64" height="26" rx="4" fill="#ffedd5" stroke="#fed7aa"/><text x="96" y="299">u:101</text>
+    <rect x="134" y="282" width="64" height="26" rx="4" fill="#ffedd5" stroke="#fed7aa"/><text x="166" y="299">u:102</text>
+    <rect x="204" y="282" width="64" height="26" rx="4" fill="#ffedd5" stroke="#fed7aa"/><text x="236" y="299">u:103</text>
+    <rect x="274" y="282" width="78" height="26" rx="4" fill="#ffedd5" stroke="#fed7aa"/><text x="313" y="299">u:104…</text>
+  </g>
+  <text x="64" y="330" font-size="10.5" fill="#9a6b43">user_id 순 정렬 — user_id로 거르면 건너뛰기 빠름</text>
+
+  <!-- optimizer -->
+  <rect x="470" y="190" width="150" height="62" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.6"/>
+  <text x="545" y="216" font-size="13" font-weight="700" fill="#334155" text-anchor="middle">옵티마이저</text>
+  <text x="545" y="234" font-size="10" fill="#64748b" text-anchor="middle">part마다 더 적게</text>
+  <text x="545" y="247" font-size="10" fill="#64748b" text-anchor="middle">읽는 쪽 자동 선택</text>
+
+  <!-- query 1: by date -->
+  <rect x="650" y="100" width="186" height="60" rx="9" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="666" y="124" font-size="11.5" font-weight="700" fill="#1d4ed8">WHERE event_date = …</text>
+  <text x="666" y="144" font-size="10.5" fill="#475569">→ base 사용 (정렬키 일치)</text>
+
+  <!-- query 2: by user -->
+  <rect x="650" y="282" width="186" height="60" rx="9" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+  <text x="666" y="306" font-size="11.5" font-weight="700" fill="#c2410c">WHERE user_id = …</text>
+  <text x="666" y="326" font-size="10.5" fill="#475569">→ projection 사용 (정렬키 일치)</text>
+
+  <!-- arrows queries to optimizer -->
+  <g stroke="#64748b" stroke-width="1.5" fill="none" marker-end="url(#pm)">
+    <path d="M650 130 C610 130 600 175 612 200"/>
+    <path d="M650 312 C610 312 600 262 612 242"/>
+  </g>
+  <text x="700" y="226" font-size="11" fill="#64748b" text-anchor="middle">쿼리는 원본 테이블에 그대로</text>
+  <text x="700" y="240" font-size="11" fill="#64748b" text-anchor="middle">— 다시 쓸 필요 없음</text>
+
+  <!-- arrows optimizer to part -->
+  <g stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#pm)">
+    <path d="M470 206 C430 190 410 175 372 168"/>
+  </g>
+  <g stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#pm)">
+    <path d="M470 236 C430 270 410 285 372 290"/>
+  </g>
+
+  <text x="28" y="396" font-size="11" fill="#94a3b8">정렬키가 다른 normal projection은 같은 데이터를 한 벌 더 저장한다(중복 비용) — 자주 쓰는 비정렬키 접근 패턴에만 선별 적용.</text>
+  <text x="28" y="416" font-size="11" fill="#94a3b8">MV와의 차이: MV는 결과를 별도 타깃 테이블에 두지만, projection은 같은 part 안에 있어 base와 어긋날 시점이 없다.</text>
+</svg>

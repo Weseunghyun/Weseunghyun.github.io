@@ -1,0 +1,54 @@
+<svg width="860" height="430" viewBox="0 0 860 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d" font-family="-apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif">
+  <title id="t">PREWHERE — 필터 컬럼만 먼저 읽어 granule을 솎고, 살아남은 곳에서만 나머지 컬럼을 읽는다</title>
+  <desc id="d">1단계 작은 필터 컬럼(status)만 읽어 조건 평가, 2단계 조건 통과 행이 없는 granule 탈락, 3단계 살아남은 granule에 대해서만 큰 SELECT 컬럼(payload)을 읽는다. 처리 행수는 같고 디스크에서 읽는 바이트만 준다.</desc>
+  <defs>
+    <marker id="wm" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="860" height="430" rx="14" fill="#ffffff"/>
+  <text x="28" y="34" font-size="18" font-weight="700" fill="#0f172a">PREWHERE — 필터 컬럼만 먼저 읽어 granule을 솎는다</text>
+  <text x="28" y="55" font-size="11.5" fill="#64748b">SELECT user_id, payload FROM events PREWHERE status = 5  ·  payload는 큰 컬럼, status는 작은 컬럼</text>
+
+  <!-- STEP 1 -->
+  <text x="60" y="92" font-size="13" font-weight="700" fill="#334155">1단계 · 작은 필터 컬럼만 읽어 조건 평가</text>
+  <g text-anchor="middle" font-size="10.5">
+    <!-- status column granules -->
+    <rect x="60" y="104" width="120" height="186" rx="8" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
+    <text x="120" y="124" font-size="11.5" font-weight="700" fill="#c2410c">status (작음)</text>
+    <rect x="74" y="134" width="92" height="26" rx="4" fill="#ffedd5"/><text x="120" y="151" fill="#7c2d12">g1 · 5 있음 ✓</text>
+    <rect x="74" y="164" width="92" height="26" rx="4" fill="#f1f5f9"/><text x="120" y="181" fill="#94a3b8">g2 · 없음 ✗</text>
+    <rect x="74" y="194" width="92" height="26" rx="4" fill="#ffedd5"/><text x="120" y="211" fill="#7c2d12">g3 · 5 있음 ✓</text>
+    <rect x="74" y="224" width="92" height="26" rx="4" fill="#f1f5f9"/><text x="120" y="241" fill="#94a3b8">g4 · 없음 ✗</text>
+    <rect x="74" y="254" width="92" height="26" rx="4" fill="#f1f5f9"/><text x="120" y="271" fill="#94a3b8">g5 · 없음 ✗</text>
+  </g>
+
+  <!-- STEP 2 -->
+  <path d="M192 197 L246 197" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#wm)"/>
+  <text x="360" y="92" font-size="13" font-weight="700" fill="#334155" text-anchor="middle">2단계 · 통과 행 없는 granule 탈락</text>
+  <g text-anchor="middle" font-size="10.5">
+    <rect x="270" y="104" width="180" height="186" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="288" y="134" width="144" height="26" rx="4" fill="#dcfce7" stroke="#86efac"/><text x="360" y="151" fill="#166534">g1 살아남음</text>
+    <rect x="288" y="164" width="144" height="26" rx="4" fill="#f1f5f9" stroke="#e2e8f0"/><text x="360" y="181" fill="#cbd5e1">g2 (스킵)</text>
+    <rect x="288" y="194" width="144" height="26" rx="4" fill="#dcfce7" stroke="#86efac"/><text x="360" y="211" fill="#166534">g3 살아남음</text>
+    <rect x="288" y="224" width="144" height="26" rx="4" fill="#f1f5f9" stroke="#e2e8f0"/><text x="360" y="241" fill="#cbd5e1">g4 (스킵)</text>
+    <rect x="288" y="254" width="144" height="26" rx="4" fill="#f1f5f9" stroke="#e2e8f0"/><text x="360" y="271" fill="#cbd5e1">g5 (스킵)</text>
+  </g>
+
+  <!-- STEP 3 -->
+  <path d="M462 197 L516 197" stroke="#64748b" stroke-width="1.6" fill="none" marker-end="url(#wm)"/>
+  <text x="660" y="92" font-size="13" font-weight="700" fill="#334155" text-anchor="middle">3단계 · 살아남은 곳만 큰 컬럼 읽기</text>
+  <g text-anchor="middle" font-size="10.5">
+    <rect x="540" y="104" width="240" height="186" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
+    <text x="660" y="124" font-size="11.5" font-weight="700" fill="#1d4ed8">payload (큼) — g1·g3만 읽음</text>
+    <rect x="558" y="134" width="204" height="26" rx="4" fill="#dbeafe" stroke="#bfdbfe"/><text x="660" y="151" fill="#1e3a8a">g1 · payload 읽기 ✓</text>
+    <rect x="558" y="164" width="204" height="26" rx="4" fill="#fafafa" stroke="#f1f5f9"/><text x="660" y="181" fill="#cbd5e1">g2 · 안 읽음</text>
+    <rect x="558" y="194" width="204" height="26" rx="4" fill="#dbeafe" stroke="#bfdbfe"/><text x="660" y="211" fill="#1e3a8a">g3 · payload 읽기 ✓</text>
+    <rect x="558" y="224" width="204" height="26" rx="4" fill="#fafafa" stroke="#f1f5f9"/><text x="660" y="241" fill="#cbd5e1">g4 · 안 읽음</text>
+    <rect x="558" y="254" width="204" height="26" rx="4" fill="#fafafa" stroke="#f1f5f9"/><text x="660" y="271" fill="#cbd5e1">g5 · 안 읽음</text>
+  </g>
+
+  <text x="28" y="328" font-size="11.5" fill="#475569"><tspan font-weight="700" fill="#0f766e">핵심:</tspan> 처리하는 행수(무엇을 계산하나)는 그대로 — 큰 payload 컬럼을 g2·g4·g5에서 안 읽으니 디스크에서 읽는 바이트만 준다.</text>
+  <text x="28" y="350" font-size="11" fill="#94a3b8">optimize_move_to_prewhere=1(기본)이면 WHERE의 강한 필터를 자동으로 PREWHERE로 옮긴다. MergeTree 계열에서만 지원.</text>
+  <text x="28" y="372" font-size="11" fill="#94a3b8">공식 최적화 문서 예: 같은 2.31M 행 처리에 디스크 읽기 23.36MB → 6.74MB(약 3배↓). 공식 문서 기준.</text>
+</svg>

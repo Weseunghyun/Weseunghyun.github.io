@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 380" width="720" height="380" role="img" aria-labelledby="t d">
+  <title id="t">Prometheus의 pull(scrape) 모델</title>
+  <desc id="d">Prometheus가 각 애플리케이션의 /metrics 엔드포인트를 주기적으로 긁어와 TSDB에 저장하고, Grafana가 PromQL로 질의한다. 단명 작업은 Pushgateway를 거친다.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5}
+    .card{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.5}
+    .prom{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+    .h{font:700 14px system-ui,sans-serif;fill:#0f172a}
+    .h2{font:700 16px system-ui,sans-serif;fill:#9a3412}
+    .s{font:400 11.5px system-ui,sans-serif;fill:#475569}
+    .m{font:600 11px ui-monospace,monospace;fill:#0f766e}
+    .pull{font:700 11px system-ui,sans-serif;fill:#ea580c}
+    .ar{stroke:#ea580c;stroke-width:2.2;fill:none;marker-end:url(#a)}
+    .ar2{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#b)}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ea580c"/></marker>
+    <marker id="b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker>
+  </defs>
+  <rect class="bg" x="1" y="1" width="718" height="378" rx="14"/>
+  <text class="h2" x="28" y="38">Prometheus는 대상을 "긁어온다"</text>
+
+  <!-- targets -->
+  <rect class="card" x="28" y="70" width="170" height="56" rx="10"/>
+  <text class="h" x="44" y="94">App A</text>
+  <text class="m" x="44" y="114">/metrics</text>
+  <rect class="card" x="28" y="142" width="170" height="56" rx="10"/>
+  <text class="h" x="44" y="166">App B</text>
+  <text class="m" x="44" y="186">/metrics</text>
+  <rect class="card" x="28" y="214" width="170" height="56" rx="10"/>
+  <text class="h" x="44" y="238">App C</text>
+  <text class="m" x="44" y="258">/metrics</text>
+
+  <!-- pushgateway -->
+  <rect class="card" x="28" y="290" width="170" height="60" rx="10"/>
+  <text class="h" x="44" y="313">Pushgateway</text>
+  <text class="s" x="44" y="333">단명 작업(배치)이</text>
+  <text class="s" x="44" y="347">push → 여기서 긁힘</text>
+
+  <!-- prometheus -->
+  <rect class="prom" x="300" y="120" width="180" height="130" rx="12"/>
+  <text class="h2" x="320" y="150">Prometheus</text>
+  <text class="s" x="320" y="174">서비스 디스커버리로</text>
+  <text class="s" x="320" y="190">대상 자동 발견</text>
+  <text class="s" x="320" y="214">TSDB 저장</text>
+  <text class="s" x="320" y="230">(head block = 메모리)</text>
+
+  <!-- scrape arrows (prometheus -> targets) -->
+  <path class="ar" d="M300 150 C250 130 230 110 200 100"/>
+  <path class="ar" d="M300 175 C250 175 230 172 200 170"/>
+  <path class="ar" d="M300 205 C250 225 230 235 200 242"/>
+  <path class="ar" d="M300 235 C250 290 230 310 200 318"/>
+  <text class="pull" x="214" y="92">scrape (15s)</text>
+  <text class="pull" x="214" y="135">pull ↙</text>
+
+  <!-- grafana -->
+  <rect class="card" x="560" y="135" width="135" height="100" rx="12"/>
+  <text class="h" x="580" y="162">Grafana</text>
+  <text class="s" x="580" y="186">PromQL 질의</text>
+  <text class="s" x="580" y="204">대시보드</text>
+  <text class="s" x="580" y="222">+ 알림</text>
+  <path class="ar2" d="M560 185 H480"/>
+  <text class="s" x="496" y="178">query</text>
+
+  <text class="s" x="28" y="372">긁으러 갔는데 응답이 없으면 = 그 대상이 죽은 것. push 방식과 달리 죽음을 바로 안다.</text>
+</svg>

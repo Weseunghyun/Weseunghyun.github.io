@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" width="720" height="360" role="img" aria-labelledby="t d">
+  <title id="t">Grafana LGTM 스택</title>
+  <desc id="d">앱이 OpenTelemetry로 계측하고 Grafana Alloy가 수집해, 메트릭은 Mimir, 로그는 Loki, 트레이스는 Tempo에 저장한 뒤 Grafana가 한 화면에서 보여준다.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5}
+    .h2{font:700 16px system-ui,sans-serif;fill:#0f172a}
+    .h{font:700 13px system-ui,sans-serif;fill:#0f172a}
+    .s{font:400 11px system-ui,sans-serif;fill:#475569}
+    .card{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.5}
+    .alloy{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+    .store{fill:#eff6ff;stroke:#3b82f6;stroke-width:1.8}
+    .graf{fill:#f5f3ff;stroke:#7c3aed;stroke-width:2}
+    .letter{font:800 20px system-ui,sans-serif}
+    .ar{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#a)}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker>
+  </defs>
+  <rect class="bg" x="1" y="1" width="718" height="358" rx="14"/>
+  <text class="h2" x="28" y="38">LGTM — 모으고(Alloy) · 저장하고(L·T·M) · 본다(G)</text>
+
+  <!-- app -->
+  <rect class="card" x="28" y="150" width="120" height="60" rx="10"/>
+  <text class="h" x="44" y="178">애플리케이션</text>
+  <text class="s" x="44" y="197">OTel 계측</text>
+
+  <!-- alloy -->
+  <rect class="alloy" x="188" y="150" width="120" height="60" rx="10"/>
+  <text class="h" x="204" y="178" fill="#9a3412">Alloy</text>
+  <text class="s" x="204" y="197">OTel Collector</text>
+
+  <!-- stores -->
+  <rect class="store" x="360" y="70" width="150" height="58" rx="10"/>
+  <text class="letter" x="378" y="106" fill="#3b82f6">M</text>
+  <text class="h" x="410" y="98">Mimir</text>
+  <text class="s" x="410" y="116">메트릭 장기저장</text>
+
+  <rect class="store" x="360" y="150" width="150" height="58" rx="10"/>
+  <text class="letter" x="378" y="186" fill="#3b82f6">L</text>
+  <text class="h" x="410" y="178">Loki</text>
+  <text class="s" x="410" y="196">로그(레이블 색인)</text>
+
+  <rect class="store" x="360" y="230" width="150" height="58" rx="10"/>
+  <text class="letter" x="378" y="266" fill="#3b82f6">T</text>
+  <text class="h" x="410" y="258">Tempo</text>
+  <text class="s" x="410" y="276">트레이스(오브젝트)</text>
+
+  <!-- grafana -->
+  <rect class="graf" x="560" y="120" width="135" height="120" rx="12"/>
+  <text class="letter" x="578" y="158" fill="#7c3aed">G</text>
+  <text class="h" x="610" y="150">Grafana</text>
+  <text class="s" x="578" y="186">단일 창</text>
+  <text class="s" x="578" y="204">대시보드·알림</text>
+  <text class="s" x="578" y="222">신호 간 점프</text>
+
+  <!-- arrows -->
+  <path class="ar" d="M148 180 H186"/>
+  <path class="ar" d="M308 175 C330 175 338 100 358 99"/>
+  <path class="ar" d="M308 180 H356"/>
+  <path class="ar" d="M308 185 C330 185 338 258 358 259"/>
+  <path class="ar" d="M510 99 C540 99 545 150 558 158"/>
+  <path class="ar" d="M510 179 H558"/>
+  <path class="ar" d="M510 259 C540 259 545 210 558 202"/>
+
+  <text class="s" x="28" y="332">앞 장의 조각들이 한 그림으로 — Loki(5장)·Tempo(7장)·Mimir(4장)를 Grafana가 한 화면에 모은다.</text>
+</svg>

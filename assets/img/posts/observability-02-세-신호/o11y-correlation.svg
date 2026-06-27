@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 360" width="760" height="360" role="img" aria-labelledby="t d">
+  <title id="t">신호 상관관계 — 메트릭에서 트레이스, 로그로 타고 들어가기</title>
+  <desc id="d">메트릭의 스파이크를 클릭하면 exemplar의 trace_id로 트레이스로 점프하고, span의 trace_id로 로그로 점프한다.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5;rx:14}
+    .card{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.5}
+    .h{font:700 17px system-ui,sans-serif;fill:#0f172a}
+    .s{font:400 12.5px system-ui,sans-serif;fill:#475569}
+    .k{font:600 12px ui-monospace,monospace;fill:#1d4ed8}
+    .lab{font:700 12px system-ui,sans-serif;fill:#64748b;letter-spacing:1px}
+    .step{font:700 13px system-ui,sans-serif;fill:#b45309}
+    .ar{stroke:#b45309;stroke-width:2.5;fill:none;marker-end:url(#a)}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#b45309"/>
+    </marker>
+  </defs>
+  <rect class="bg" x="1" y="1" width="758" height="358" rx="14"/>
+
+  <!-- Metrics card -->
+  <rect class="card" x="28" y="70" width="210" height="150" rx="12"/>
+  <text class="lab" x="44" y="96">METRICS</text>
+  <text class="h" x="44" y="120">① 이상 발견</text>
+  <text class="s" x="44" y="144">p99 지연 그래프에</text>
+  <text class="s" x="44" y="162">스파이크가 튄다</text>
+  <!-- mini spark -->
+  <polyline points="44,200 70,196 96,198 122,176 148,150 174,194 200,196" fill="none" stroke="#2563eb" stroke-width="2.5"/>
+  <circle cx="148" cy="150" r="5" fill="#dc2626"/>
+  <text class="k" x="44" y="216">exemplar: trace_id</text>
+
+  <!-- Traces card -->
+  <rect class="card" x="275" y="70" width="210" height="150" rx="12"/>
+  <text class="lab" x="291" y="96">TRACES</text>
+  <text class="h" x="291" y="120">② 어디서 막혔나</text>
+  <rect x="291" y="138" width="180" height="13" rx="3" fill="#bfdbfe"/>
+  <rect x="305" y="156" width="120" height="13" rx="3" fill="#93c5fd"/>
+  <rect x="319" y="174" width="150" height="13" rx="3" fill="#dc2626"/>
+  <text class="s" x="291" y="204">결제 → DB 호출 750ms</text>
+  <text class="k" x="291" y="216">span: trace_id</text>
+
+  <!-- Logs card -->
+  <rect class="card" x="522" y="70" width="210" height="150" rx="12"/>
+  <text class="lab" x="538" y="96">LOGS</text>
+  <text class="h" x="538" y="120">③ 왜 그랬나</text>
+  <text class="s" x="538" y="146">WARN connection</text>
+  <text class="s" x="538" y="164">pool exhausted</text>
+  <text class="s" x="538" y="190">근본 원인 확인</text>
+  <text class="k" x="538" y="216">log line: trace_id</text>
+
+  <!-- arrows -->
+  <path class="ar" d="M242 145 H271"/>
+  <path class="ar" d="M489 145 H518"/>
+  <text class="step" x="244" y="135">trace_id</text>
+  <text class="step" x="491" y="135">trace_id</text>
+
+  <text class="h" x="28" y="40">하나의 사건을 끝까지 따라가기</text>
+  <text class="s" x="28" y="300">공통 식별자 trace_id 가 세 신호를 묶는다 — 따로 보면 30분, 연결되면 3분.</text>
+  <text class="s" x="28" y="322">메트릭(얼마나) → 트레이스(어디서) → 로그(무슨 일이)</text>
+</svg>

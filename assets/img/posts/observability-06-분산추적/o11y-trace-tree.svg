@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 300" width="720" height="300" role="img" aria-labelledby="t d">
+  <title id="t">트레이스 = span 트리 (간트 차트 형태)</title>
+  <desc id="d">결제 요청 한 건의 트레이스. 전체 800ms 중 결제 서비스의 DB 호출이 750ms를 차지해 병목이 한눈에 보인다.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5}
+    .h2{font:700 16px system-ui,sans-serif;fill:#0f172a}
+    .lab{font:600 12px system-ui,sans-serif;fill:#1e293b}
+    .ms{font:600 11px ui-monospace,monospace;fill:#475569}
+    .axis{font:400 10px system-ui,sans-serif;fill:#94a3b8}
+    .bar{fill:#93c5fd}
+    .bar2{fill:#60a5fa}
+    .barbad{fill:#dc2626}
+    .grid{stroke:#e2e8f0;stroke-width:1}
+  </style>
+  <rect class="bg" x="1" y="1" width="718" height="298" rx="14"/>
+  <text class="h2" x="28" y="38">하나의 요청 = span 트리 (시간 축으로 펼치면 병목이 보인다)</text>
+
+  <!-- time grid -->
+  <line class="grid" x1="250" y1="62" x2="250" y2="252"/>
+  <line class="grid" x1="365" y1="62" x2="365" y2="252"/>
+  <line class="grid" x1="480" y1="62" x2="480" y2="252"/>
+  <line class="grid" x1="595" y1="62" x2="595" y2="252"/>
+  <line class="grid" x1="690" y1="62" x2="690" y2="252"/>
+  <text class="axis" x="250" y="270">0ms</text>
+  <text class="axis" x="350" y="270">200</text>
+  <text class="axis" x="465" y="270">400</text>
+  <text class="axis" x="580" y="270">600</text>
+  <text class="axis" x="672" y="270">800ms</text>
+
+  <!-- root span -->
+  <text class="lab" x="28" y="92">POST /checkout</text>
+  <rect class="bar" x="250" y="80" width="440" height="18" rx="3"/>
+  <text class="ms" x="694" y="94" text-anchor="end" fill="#fff">800ms</text>
+
+  <!-- auth -->
+  <text class="lab" x="44" y="124">└ auth 인증</text>
+  <rect class="bar2" x="250" y="112" width="44" height="18" rx="3"/>
+  <text class="ms" x="300" y="126">20ms</text>
+
+  <!-- payment -->
+  <text class="lab" x="44" y="156">└ payment 결제</text>
+  <rect class="bar2" x="296" y="144" width="394" height="18" rx="3"/>
+  <text class="ms" x="694" y="158" text-anchor="end" fill="#fff">780ms</text>
+
+  <!-- db (the culprit) -->
+  <text class="lab" x="60" y="188">└ DB query</text>
+  <rect class="barbad" x="310" y="176" width="368" height="18" rx="3"/>
+  <text class="ms" x="672" y="190" text-anchor="end" fill="#fff">750ms ← 병목</text>
+
+  <!-- notify -->
+  <text class="lab" x="44" y="220">└ notify 알림</text>
+  <rect class="bar2" x="666" y="208" width="22" height="18" rx="3"/>
+  <text class="ms" x="660" y="222" text-anchor="end">8ms</text>
+
+  <text class="axis" x="28" y="244">trace ID 하나로 묶인 5개 span — DB 호출이 전체 시간을 잡아먹었다.</text>
+</svg>

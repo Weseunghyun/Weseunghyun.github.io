@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 340" width="740" height="340" role="img" aria-labelledby="t d">
+  <title id="t">OTel Collector 파이프라인과 배포 패턴</title>
+  <desc id="d">Collector는 receiver로 받아 processor로 가공하고 exporter로 내보낸다. memory_limiter를 맨 앞에 둔다. 배포는 노드별 agent와 중앙 gateway로 나뉜다.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5}
+    .h2{font:700 16px system-ui,sans-serif;fill:#0f172a}
+    .h{font:700 12px system-ui,sans-serif;fill:#0f172a}
+    .s{font:400 10.5px system-ui,sans-serif;fill:#475569}
+    .rc{fill:#dbeafe;stroke:#2563eb;stroke-width:1.6}
+    .pr{fill:#fef3c7;stroke:#d97706;stroke-width:1.6}
+    .ex{fill:#dcfce7;stroke:#16a34a;stroke-width:1.6}
+    .box{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.4}
+    .ar{stroke:#64748b;stroke-width:2.2;fill:none;marker-end:url(#a)}
+    .lab{font:700 10px system-ui,sans-serif;fill:#475569}
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+  <rect class="bg" x="1" y="1" width="738" height="338" rx="14"/>
+  <text class="h2" x="28" y="38">Collector 파이프라인 — receiver → processor → exporter</text>
+
+  <!-- pipeline -->
+  <rect class="rc" x="40" y="70" width="150" height="56" rx="9"/>
+  <text class="h" x="58" y="94" fill="#1e40af">receiver</text>
+  <text class="s" x="58" y="113">otlp·prometheus·jaeger</text>
+
+  <rect class="pr" x="220" y="70" width="270" height="56" rx="9"/>
+  <text class="h" x="238" y="94" fill="#92400e">processor (순서 중요)</text>
+  <text class="s" x="238" y="113">memory_limiter(맨앞) → batch → tail_sampling</text>
+
+  <rect class="ex" x="520" y="70" width="180" height="56" rx="9"/>
+  <text class="h" x="538" y="94" fill="#15803d">exporter</text>
+  <text class="s" x="538" y="113">otlp·prometheus·벤더</text>
+
+  <path class="ar" d="M190 98 H218"/>
+  <path class="ar" d="M490 98 H518"/>
+
+  <!-- deployment -->
+  <text class="h2" x="28" y="178" font-size="14">배포 패턴</text>
+
+  <rect class="box" x="40" y="196" width="200" height="110" rx="10"/>
+  <text class="h" x="58" y="220">agent</text>
+  <text class="s" x="58" y="240">노드/파드 옆</text>
+  <text class="s" x="58" y="258">(DaemonSet·sidecar)</text>
+  <text class="s" x="58" y="282">앱 변경 없이 offload</text>
+
+  <rect class="box" x="270" y="196" width="200" height="110" rx="10"/>
+  <text class="h" x="288" y="220">gateway</text>
+  <text class="s" x="288" y="240">중앙 집중</text>
+  <text class="s" x="288" y="258">샘플링·필터·정책</text>
+  <text class="s" x="288" y="282">자격증명 격리</text>
+
+  <rect class="box" x="500" y="196" width="210" height="110" rx="10"/>
+  <text class="h" x="518" y="220">흔한 조합</text>
+  <text class="s" x="518" y="240">노드별 agent →</text>
+  <text class="s" x="518" y="258">중앙 gateway(tail sampling)</text>
+  <text class="s" x="518" y="282">→ 백엔드</text>
+
+  <path class="ar" d="M240 251 H268"/>
+  <path class="ar" d="M470 251 H498"/>
+</svg>

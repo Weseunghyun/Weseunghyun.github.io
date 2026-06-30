@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 320" width="740" height="320" role="img" aria-labelledby="t d">
+  <title id="t">Tempo block 구조와 두 가지 조회</title>
+  <desc id="d">object storage의 block 안에는 bloom filter와 trace ID index, 컬럼형 Parquet이 들어있다. trace ID 조회는 bloom으로 빠르게 좁히고, 속성 검색은 Parquet 컬럼을 스캔한다.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5}
+    .h2{font:700 15px system-ui,sans-serif;fill:#0f172a}
+    .h{font:700 12px system-ui,sans-serif;fill:#0f172a}
+    .s{font:400 10.5px system-ui,sans-serif;fill:#475569}
+    .blk{fill:#eff6ff;stroke:#3b82f6;stroke-width:1.8}
+    .bloom{fill:#fef3c7;stroke:#d97706;stroke-width:1.6}
+    .idx{fill:#e0e7ff;stroke:#6366f1;stroke-width:1.6}
+    .pq{fill:#dcfce7;stroke:#16a34a;stroke-width:1.6}
+    .ar{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#a)}
+    .lab{font:700 10px system-ui,sans-serif;fill:#475569}
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+  <rect class="bg" x="1" y="1" width="738" height="318" rx="14"/>
+  <text class="h2" x="28" y="36">object storage 안 block — "무인덱스"가 아니다</text>
+
+  <!-- block -->
+  <rect class="blk" x="360" y="60" width="350" height="200" rx="12"/>
+  <text class="lab" x="378" y="82">object storage · block (vParquet)</text>
+  <rect class="bloom" x="378" y="92" width="314" height="40" rx="8"/>
+  <text class="h" x="394" y="117" fill="#92400e">bloom filter — trace ID가 여기 있나?</text>
+  <rect class="idx" x="378" y="140" width="314" height="40" rx="8"/>
+  <text class="h" x="394" y="165" fill="#3730a3">trace ID index — 어느 row group?</text>
+  <rect class="pq" x="378" y="188" width="314" height="56" rx="8"/>
+  <text class="h" x="394" y="210" fill="#15803d">컬럼형 Parquet (속성)</text>
+  <text class="s" x="394" y="230">자주 쓰는 속성 = dedicated column</text>
+
+  <!-- queries -->
+  <rect class="bg" x="28" y="80" width="290" height="70" rx="10" stroke="#cbd5e1"/>
+  <text class="h" x="44" y="104">① trace ID 조회</text>
+  <text class="s" x="44" y="124">bloom으로 block 후보 제거 →</text>
+  <text class="s" x="44" y="140">index로 좁힘 → 빠름</text>
+  <path class="ar" d="M318 112 C340 112 345 110 358 110"/>
+
+  <rect class="bg" x="28" y="170" width="290" height="70" rx="10" stroke="#cbd5e1"/>
+  <text class="h" x="44" y="194">② 속성 검색 (TraceQL)</text>
+  <text class="s" x="44" y="214">시간범위 내 block을 스캔 →</text>
+  <text class="s" x="44" y="230">dedicated column으로 가속</text>
+  <path class="ar" d="M318 210 C340 210 345 214 358 216"/>
+
+  <text class="s" x="28" y="284">외부 인덱스 DB(ES·Cassandra)는 불필요하지만, block 내부에 bloom+index는 있다. 3.0은 RF3→RF1로 저장 절반.</text>
+</svg>

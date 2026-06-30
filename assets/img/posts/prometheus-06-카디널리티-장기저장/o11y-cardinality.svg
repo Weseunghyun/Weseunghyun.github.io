@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 320" width="720" height="320" role="img" aria-labelledby="t d">
+  <title id="t">카디널리티 폭발 — 레이블 하나가 시계열을 곱으로 늘린다</title>
+  <desc id="d">method 2개와 status 3개면 시계열 6개지만, user_id 5만을 레이블로 추가하면 30만 개로 폭발한다.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5}
+    .h2{font:700 16px system-ui,sans-serif;fill:#0f172a}
+    .s{font:400 12px system-ui,sans-serif;fill:#475569}
+    .m{font:600 12px ui-monospace,monospace;fill:#1d4ed8}
+    .ok{font:800 30px system-ui,sans-serif;fill:#16a34a}
+    .bad{font:800 30px system-ui,sans-serif;fill:#dc2626}
+    .tag{font:700 11px system-ui,sans-serif;fill:#475569}
+    .cardok{fill:#f0fdf4;stroke:#16a34a;stroke-width:2}
+    .cardbad{fill:#fef2f2;stroke:#dc2626;stroke-width:2}
+  </style>
+  <rect class="bg" x="1" y="1" width="718" height="318" rx="14"/>
+  <text class="h2" x="28" y="40">레이블 하나가 시계열을 곱으로 폭발시킨다</text>
+
+  <!-- safe -->
+  <rect class="cardok" x="28" y="66" width="300" height="210" rx="12"/>
+  <text class="tag" x="48" y="94">레이블: method × status</text>
+  <text class="m" x="48" y="118">method = {GET, POST}</text>
+  <text class="m" x="48" y="140">status = {200, 404, 500}</text>
+  <text class="s" x="48" y="172">2 × 3 =</text>
+  <text class="ok" x="48" y="214">6 시계열</text>
+  <text class="s" x="48" y="252">메모리 여유 — 괜찮다</text>
+
+  <!-- explosion -->
+  <rect class="cardbad" x="392" y="66" width="300" height="210" rx="12"/>
+  <text class="tag" x="412" y="94">+ user_id (5만)</text>
+  <text class="m" x="412" y="118">method = {GET, POST}</text>
+  <text class="m" x="412" y="140">status = {200, 404, 500}</text>
+  <text class="m" x="412" y="162">user_id = {1 … 50000}</text>
+  <text class="s" x="412" y="192">2 × 3 × 50,000 =</text>
+  <text class="bad" x="412" y="232">300,000 시계열</text>
+  <text class="s" x="412" y="262">head block 메모리 폭발 → OOM</text>
+
+  <text class="h2" x="350" y="180" text-anchor="middle" fill="#94a3b8" font-size="34">→</text>
+</svg>

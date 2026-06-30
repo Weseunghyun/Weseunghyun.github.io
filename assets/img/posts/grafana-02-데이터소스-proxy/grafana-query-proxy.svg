@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 320" width="740" height="320" role="img" aria-labelledby="t d">
+  <title id="t">Grafana — 저장하지 않고 쿼리를 위임하는 단일 창</title>
+  <desc id="d">Grafana 자체 DB는 대시보드·유저 메타데이터만 저장한다. 시계열·로그·트레이스는 외부 데이터소스에 있고, Grafana는 query proxy로 쿼리를 위임해 한 화면에 모은다.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5}
+    .h2{font:700 15px system-ui,sans-serif;fill:#0f172a}
+    .h{font:700 12px system-ui,sans-serif;fill:#0f172a}
+    .s{font:400 10.5px system-ui,sans-serif;fill:#475569}
+    .graf{fill:#f5f3ff;stroke:#7c3aed;stroke-width:2}
+    .meta{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.4}
+    .ds{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.5}
+    .ar{stroke:#7c3aed;stroke-width:2.2;fill:none;marker-end:url(#a)}
+    .lab{font:700 10px system-ui,sans-serif;fill:#7c3aed}
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7c3aed"/></marker></defs>
+  <rect class="bg" x="1" y="1" width="738" height="318" rx="14"/>
+  <text class="h2" x="28" y="36">Grafana = 저장소가 아니라 query proxy(단일 창)</text>
+
+  <!-- grafana -->
+  <rect class="graf" x="40" y="100" width="170" height="120" rx="12"/>
+  <text class="h" x="58" y="128" fill="#5b21b6">Grafana</text>
+  <text class="s" x="58" y="150">시각화·알림</text>
+  <rect class="meta" x="58" y="162" width="134" height="44" rx="8"/>
+  <text class="s" x="70" y="182">자체 DB =</text>
+  <text class="s" x="70" y="198">대시보드·유저 메타만</text>
+
+  <!-- datasources -->
+  <rect class="ds" x="500" y="56" width="210" height="40" rx="9"/>
+  <text class="h" x="518" y="81">Prometheus / Mimir (메트릭)</text>
+  <rect class="ds" x="500" y="106" width="210" height="40" rx="9"/>
+  <text class="h" x="518" y="131">Loki (로그)</text>
+  <rect class="ds" x="500" y="156" width="210" height="40" rx="9"/>
+  <text class="h" x="518" y="181">Tempo (트레이스)</text>
+  <rect class="ds" x="500" y="206" width="210" height="40" rx="9"/>
+  <text class="h" x="518" y="231">SQL · Elasticsearch · CloudWatch …</text>
+
+  <path class="ar" d="M210 140 C360 140 360 76 498 76"/>
+  <path class="ar" d="M210 150 C360 150 360 126 498 126"/>
+  <path class="ar" d="M210 160 C360 160 360 176 498 176"/>
+  <path class="ar" d="M210 172 C360 172 360 226 498 226"/>
+  <text class="lab" x="300" y="120">query proxy (위임)</text>
+
+  <text class="s" x="28" y="276">시계열·로그·트레이스는 데이터소스에 있고, Grafana는 쿼리만 위임해 한 화면에 모은다.</text>
+  <text class="s" x="28" y="296">중립적이라 어떤 백엔드든 붙는다 — 그래서 "관측의 단일 창".</text>
+</svg>

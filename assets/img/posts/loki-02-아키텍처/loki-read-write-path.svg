@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 320" width="740" height="320" role="img" aria-labelledby="t d">
+  <title id="t">Loki 쓰기·읽기 경로</title>
+  <desc id="d">쓰기는 distributor가 검증·분산해 ingester가 메모리 chunk로 쌓다 object storage로 flush한다. 읽기는 query-frontend가 쿼리를 분할해 querier가 ingester와 object storage를 함께 조회한다.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5}
+    .h2{font:700 15px system-ui,sans-serif;fill:#0f172a}
+    .h{font:700 12px system-ui,sans-serif;fill:#0f172a}
+    .s{font:400 10px system-ui,sans-serif;fill:#475569}
+    .w{fill:#fef3c7;stroke:#d97706;stroke-width:1.6}
+    .r{fill:#dbeafe;stroke:#2563eb;stroke-width:1.6}
+    .store{fill:#e2e8f0;stroke:#94a3b8;stroke-width:1.6}
+    .ar{stroke:#64748b;stroke-width:2;fill:none;marker-end:url(#a)}
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#64748b"/></marker></defs>
+  <rect class="bg" x="1" y="1" width="738" height="318" rx="14"/>
+
+  <!-- write row -->
+  <text class="h2" x="28" y="36">쓰기 경로</text>
+  <rect class="w" x="28" y="50" width="130" height="48" rx="9"/>
+  <text class="h" x="44" y="70" fill="#92400e">distributor</text>
+  <text class="s" x="44" y="87">검증·해싱·분산(RF)</text>
+  <rect class="w" x="200" y="50" width="130" height="48" rx="9"/>
+  <text class="h" x="216" y="70" fill="#92400e">ingester</text>
+  <text class="s" x="216" y="87">메모리 chunk + WAL</text>
+  <rect class="store" x="372" y="50" width="150" height="48" rx="9"/>
+  <text class="h" x="388" y="70">object storage</text>
+  <text class="s" x="388" y="87">압축 chunk + index</text>
+  <path class="ar" d="M158 74 H198"/>
+  <path class="ar" d="M330 74 H370"/>
+  <text class="s" x="332" y="44">flush</text>
+
+  <!-- read row -->
+  <text class="h2" x="28" y="150">읽기 경로</text>
+  <rect class="r" x="28" y="164" width="130" height="48" rx="9"/>
+  <text class="h" x="44" y="184" fill="#1e40af">query-frontend</text>
+  <text class="s" x="44" y="201">쿼리 분할·캐시</text>
+  <rect class="r" x="200" y="164" width="130" height="48" rx="9"/>
+  <text class="h" x="216" y="184" fill="#1e40af">querier</text>
+  <text class="s" x="216" y="201">LogQL 실행·dedup</text>
+  <path class="ar" d="M158 188 H198"/>
+  <!-- querier reads both -->
+  <rect class="w" x="372" y="146" width="150" height="40" rx="9"/>
+  <text class="h" x="388" y="171" fill="#92400e">ingester (최근)</text>
+  <rect class="store" x="372" y="194" width="150" height="40" rx="9"/>
+  <text class="h" x="388" y="219">object storage (과거)</text>
+  <path class="ar" d="M330 184 C350 184 355 168 370 166"/>
+  <path class="ar" d="M330 192 C350 192 355 210 370 213"/>
+
+  <text class="s" x="28" y="276">핵심: 본문은 object storage에 압축 저장(label만 색인). querier는 최근(ingester)+과거(storage)를 함께 본다.</text>
+  <text class="s" x="28" y="296">배포: monolithic → simple scalable(SSD, deprecated) → microservices.</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 330" width="720" height="330" role="img" aria-labelledby="t d">
+  <title id="t">Loki vs ELK — 무엇을 색인하나</title>
+  <desc id="d">ELK는 로그의 모든 필드를 역색인해 강력하지만 비싸고, Loki는 레이블만 색인하고 본문은 오브젝트 스토리지에 압축 저장해 싸지만 본문 검색은 훑어야 한다.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5}
+    .h2{font:700 16px system-ui,sans-serif;fill:#0f172a}
+    .h{font:700 14px system-ui,sans-serif;fill:#0f172a}
+    .s{font:400 11.5px system-ui,sans-serif;fill:#475569}
+    .idx{fill:#fee2e2;stroke:#dc2626;stroke-width:1.5}
+    .idxs{fill:#dcfce7;stroke:#16a34a;stroke-width:1.5}
+    .body{fill:#e2e8f0;stroke:#94a3b8;stroke-width:1.2}
+    .cap{font:600 11px system-ui,sans-serif;fill:#334155}
+    .price{font:800 15px system-ui,sans-serif}
+  </style>
+  <rect class="bg" x="1" y="1" width="718" height="328" rx="14"/>
+  <text class="h2" x="28" y="38">무엇을 색인하느냐가 비용을 가른다</text>
+
+  <!-- ELK -->
+  <text class="h" x="60" y="74">ELK (Elasticsearch)</text>
+  <text class="s" x="60" y="94">모든 필드를 역색인</text>
+  <!-- all fields indexed -->
+  <rect class="idx" x="40" y="108" width="300" height="22" rx="4"/>
+  <rect class="idx" x="40" y="136" width="300" height="22" rx="4"/>
+  <rect class="idx" x="40" y="164" width="300" height="22" rx="4"/>
+  <rect class="idx" x="40" y="192" width="300" height="22" rx="4"/>
+  <text class="cap" x="50" y="124">time · service · level · msg · user · ip … (전부 색인)</text>
+  <text class="cap" x="50" y="152">→ 아무 단어나 즉시 검색</text>
+  <text class="cap" x="50" y="180">→ 색인이 원본보다 커짐</text>
+  <text class="price" x="50" y="208" fill="#dc2626">비쌈 · 강력함</text>
+
+  <!-- divider -->
+  <line x1="360" y1="64" x2="360" y2="300" stroke="#e2e8f0" stroke-width="2"/>
+
+  <!-- Loki -->
+  <text class="h" x="392" y="74">Loki ("로그계의 Prometheus")</text>
+  <text class="s" x="392" y="94">레이블만 색인 · 본문은 압축 저장</text>
+  <rect class="idxs" x="392" y="108" width="150" height="22" rx="4"/>
+  <text class="cap" x="402" y="124">{service, level} 색인</text>
+  <rect class="body" x="392" y="136" width="300" height="60" rx="6"/>
+  <text class="cap" x="402" y="158">본문 = 오브젝트 스토리지에</text>
+  <text class="cap" x="402" y="176">압축 저장 (색인 안 함)</text>
+  <text class="cap" x="402" y="212">→ 레이블로 좁힌 뒤 본문은 grep(훑기)</text>
+  <text class="price" x="392" y="236" fill="#16a34a">쌈 · 본문검색 약함</text>
+
+  <text class="s" x="28" y="296">공통 함정: 무한한 값(user_id·IP)을 레이블/색인 키로 쓰면 둘 다 카디널리티로 터진다.</text>
+</svg>

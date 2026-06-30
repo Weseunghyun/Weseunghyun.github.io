@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 340" width="740" height="340" role="img" aria-labelledby="t d">
+  <title id="t">Prometheus 장기저장·확장 구도</title>
+  <desc id="d">Prometheus는 remote write로 Thanos/Cortex/Mimir/VictoriaMetrics 같은 장기저장에 데이터를 흘려보낸다. 앞 셋은 Prometheus TSDB를 재사용·확장하고, VictoriaMetrics는 별도 엔진이다.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5}
+    .h2{font:700 16px system-ui,sans-serif;fill:#0f172a}
+    .h{font:700 12px system-ui,sans-serif;fill:#0f172a}
+    .s{font:400 10.5px system-ui,sans-serif;fill:#475569}
+    .prom{fill:#fff7ed;stroke:#ea580c;stroke-width:1.8}
+    .ext{fill:#eef2ff;stroke:#6366f1;stroke-width:1.6}
+    .vm{fill:#ecfeff;stroke:#0891b2;stroke-width:1.8}
+    .ar{stroke:#ea580c;stroke-width:2.2;fill:none;marker-end:url(#a)}
+    .lab{font:700 10px system-ui,sans-serif;fill:#ea580c}
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ea580c"/></marker></defs>
+  <rect class="bg" x="1" y="1" width="738" height="338" rx="14"/>
+  <text class="h2" x="28" y="38">한 대로 안 될 때 — remote write로 장기저장에 위임</text>
+
+  <!-- prometheus -->
+  <rect class="prom" x="28" y="120" width="150" height="90" rx="10"/>
+  <text class="h" x="46" y="150" fill="#9a3412">Prometheus</text>
+  <text class="s" x="46" y="170">단기 보존 · scrape</text>
+  <text class="s" x="46" y="188">(로컬 TSDB)</text>
+  <path class="ar" d="M178 165 H230"/>
+  <text class="lab" x="182" y="156">remote write</text>
+
+  <!-- group: prom-lineage -->
+  <rect class="ext" x="234" y="70" width="240" height="118" rx="10"/>
+  <text class="h" x="252" y="92">Prometheus TSDB 재사용·확장</text>
+  <text class="s" x="252" y="116">• Thanos — sidecar로 얹기(CNCF)</text>
+  <text class="s" x="252" y="136">• Cortex — push 백엔드(CNCF·Apache)</text>
+  <text class="s" x="252" y="156">• Mimir — Grafana판(AGPLv3·非CNCF)</text>
+  <text class="s" x="252" y="178">→ Prometheus를 대체 아닌 보완</text>
+
+  <!-- group: VM -->
+  <rect class="vm" x="234" y="208" width="240" height="74" rx="10"/>
+  <text class="h" x="252" y="230" fill="#155e75">VictoriaMetrics — 별도 엔진</text>
+  <text class="s" x="252" y="250">처음부터 새로 쓴 TSDB(PromQL 호환)</text>
+  <text class="s" x="252" y="268">→ Prometheus drop-in 표방</text>
+
+  <!-- object storage -->
+  <rect class="ext" x="528" y="120" width="180" height="80" rx="10"/>
+  <text class="h" x="546" y="148">object storage</text>
+  <text class="s" x="546" y="168">S3 / GCS / Azure</text>
+  <text class="s" x="546" y="186">전역 쿼리·다운샘플·보존</text>
+  <path class="ar" d="M474 140 C500 140 506 150 526 152" />
+  <path class="ar" d="M474 240 C505 240 510 185 526 178"/>
+
+  <text class="s" x="28" y="312">🔴 벤더 "40배·10~70배" 수치는 자체 벤치 — 독립 재현 없음. HA pair·federation·agent mode는 8장.</text>
+</svg>

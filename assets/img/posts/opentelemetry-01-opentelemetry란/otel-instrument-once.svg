@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 320" width="740" height="320" role="img" aria-labelledby="t d">
+  <title id="t">OpenTelemetry — 한 번 계측, 어디로든</title>
+  <desc id="d">앱을 OpenTelemetry 표준으로 한 번만 계측하면 OTLP로 데이터를 보내고, 백엔드는 코드 변경 없이 Datadog·Grafana·자체 백엔드로 바꿀 수 있다.</desc>
+  <style>
+    .bg{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5}
+    .h2{font:700 16px system-ui,sans-serif;fill:#0f172a}
+    .h{font:700 13px system-ui,sans-serif;fill:#0f172a}
+    .s{font:400 11px system-ui,sans-serif;fill:#475569}
+    .app{fill:#eef2ff;stroke:#6366f1;stroke-width:2}
+    .otlp{fill:#fff7ed;stroke:#ea580c;stroke-width:2}
+    .be{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.5}
+    .ar{stroke:#ea580c;stroke-width:2.4;fill:none;marker-end:url(#a)}
+    .lab{font:700 11px system-ui,sans-serif;fill:#ea580c}
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#ea580c"/></marker></defs>
+  <rect class="bg" x="1" y="1" width="738" height="318" rx="14"/>
+  <text class="h2" x="28" y="40">"한 번 계측하면 어디로든 보낸다"</text>
+
+  <!-- app -->
+  <rect class="app" x="28" y="120" width="160" height="80" rx="10"/>
+  <text class="h" x="46" y="150" fill="#3730a3">애플리케이션</text>
+  <text class="s" x="46" y="172">OTel 표준으로</text>
+  <text class="s" x="46" y="189">한 번만 계측</text>
+
+  <!-- otlp -->
+  <rect class="otlp" x="262" y="125" width="140" height="70" rx="10"/>
+  <text class="h" x="280" y="153" fill="#9a3412">OTLP</text>
+  <text class="s" x="280" y="174">표준 프로토콜</text>
+  <text class="s" x="280" y="190">(+ semconv)</text>
+  <path class="ar" d="M188 160 H260"/>
+
+  <!-- backends -->
+  <rect class="be" x="500" y="60" width="210" height="44" rx="9"/>
+  <text class="h" x="518" y="87">Datadog</text>
+  <rect class="be" x="500" y="118" width="210" height="44" rx="9"/>
+  <text class="h" x="518" y="145">Grafana (Tempo·Mimir·Loki)</text>
+  <rect class="be" x="500" y="176" width="210" height="44" rx="9"/>
+  <text class="h" x="518" y="203">자체 백엔드 / 그 무엇이든</text>
+
+  <path class="ar" d="M402 150 C450 150 455 84 498 82"/>
+  <path class="ar" d="M402 160 C450 160 460 140 498 140"/>
+  <path class="ar" d="M402 170 C450 170 455 196 498 198"/>
+  <text class="lab" x="412" y="120">설정만 바꾸면</text>
+
+  <text class="s" x="28" y="270">벤더 종속(lock-in) 탈출 — 도구를 바꿔도 앱 계측 코드는 그대로. 2026-05 CNCF Graduated.</text>
+  <text class="s" x="28" y="292">계측은 OTel, 보내는 곳은 자유.</text>
+</svg>
